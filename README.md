@@ -38,11 +38,10 @@ Aşağıdaki tablolar kullanılmıştır:
 - **Personeller:** PersonelId, Ad, Soyad, Email, Telefon, Pozisyon, AktifMi
 - **StokHareketleri:** HareketId, UrunId, Miktar, Tarih, PersonelId, Aciklama, HareketTipi
 
-## 📄 Yeni Eklenen Özellikler
+## 📸 Ekran Görüntüleri
 
-- ✅ `@Html.ValidationMessageFor` ile kullanıcı dostu validasyon mesajları eklendi
-- ✅ Formlarda Html Helpers aktif şekilde kullanılarak kod okunabilirliği ve bakım kolaylığı artırıldı
-- ✅ Uzun veri listelerinde sayfalama (pagination) desteği sağlandı (`PagedList.Mvc` kullanılarak)
+![Öğrenci Listesi](./Images/ogrenci-listesi.png)
+
 
 ## ⚙️ Kurulum Adımları
 
