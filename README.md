@@ -31,21 +31,13 @@ Bu proje, **ASP.NET MVC 5** konusunda pratik yapmak amacıyla geliştirilmiş bi
 ## 🗃️ Veritabanı Tasarımı
 
 Aşağıdaki tablolar kullanılmıştır:
-| Tablo | Açıklama |
-|-------|----------|
-| **tblkategori** | KategoriId, KategoriAdi, Aciklama |
-| **tblurun** | UrunId, UrunAdi, KategoriId, StokAdet, BirimFiyat, Barkod, EklenmeTarihi |
-| **tblmusteri** | MusteriId, Ad, Soyad, Email, Telefon, Adres |
-| **tblpersonel** | PersonelId, Ad, Soyad, Email, Telefon, Pozisyon, AktifMi |
-| **tblstokhareket** | HareketId, UrunId, Miktar, Tarih, PersonelId, Aciklama, HareketTipi |
-| **tblkullanici** | KullaniciId, KullaniciAd, Sifre, Rol |
 
+![1](./project-images/1.png)
 ---
 
 ## 📸 Ekran Görüntüleri
 
-### Veritabanı
-![1](./project-images/1.png)
+
 
 ### Giriş Paneli
 ![1](./project-images/7.png)
