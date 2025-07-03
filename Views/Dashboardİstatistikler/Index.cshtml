@@ -1,0 +1,181 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model MVCSTOK.Models.Entity.DashboardViewModel
+
+<style>
+    .dashboard-card {
+        padding: 20px;
+        border-radius: 8px;
+        color: white;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        margin-bottom: 20px;
+    }
+
+        .dashboard-card h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .dashboard-card .value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+    .bg-blue {
+        background-color: #007bff; /* canlı mavi */
+        color: white;
+    }
+
+    .bg-green {
+        background-color: #28a745; /* canlı yeşil */
+        color: white;
+    }
+
+    .bg-orange {
+        background-color: #ff6600; /* canlı turuncu */
+        color: white;
+    }
+
+    .bg-pink {
+        background-color: #e91e63; /* fuşya/pembe */
+        color: white;
+    }
+</style>
+
+
+<div class="row dashboard-row">
+    <div class="col-md-3">
+        <div class="dashboard-card bg-blue">
+            <h4>Toplam Ürün</h4>
+            <div class="value">@Model.UrunSayisi</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="dashboard-card bg-green">
+            <h4>Toplam Müşteri</h4>
+            <div class="value">@Model.MusteriSayisi</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="dashboard-card bg-orange">
+            <h4>Toplam Gelir</h4>
+            <div class="value">@String.Format("{0:C}", Model.ToplamGelir)</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="dashboard-card bg-pink">
+            <h4>Toplam Personel</h4>
+            <div class="value">@Model.PersonelSayisi</div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 style="color: green;"><span class="glyphicon glyphicon-apple"></span> Son Eklenen Ürünler</h4>
+            <table class="table table-bordered table-hover">
+
+                <thead>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Stok</th>
+                        <th>Fiyat</th>
+                        <th>Tarih</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model.SonUrunler)
+                {
+                    <tr>
+                        <td>@item.UrunAd</td>
+                        <td>@item.StokAdet</td>
+                        <td>@item.satisfiyat ₺</td>
+                        <td>@string.Format("{0:dd.MM.yyyy}", item.EklenmeTarihi)</td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h4 style="color: red;"><span class="glyphicon glyphicon-warning-sign"></span> Kritik Stoktaki Ürünler</h4>
+            @if (Model.KritikUrunler.Count() == 0)
+            {
+                <div class="alert alert-success">Kritik stokta ürün bulunmamaktadır.</div>
+            }
+            else
+            {
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Ürün Adı</th>
+                            <th>Stok</th>
+                            <th>Kategori</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.KritikUrunler)
+                        {
+                            <tr class="danger">
+                                <td>@item.UrunAd</td>
+                                <td>@item.StokAdet</td>
+                                <td>@(item.tblkategori?.KategoriAd ?? "Kategori Yok")</td>
+                                <!--Bu yazım (?.) sayesinde eğer tblkategori null ise hata vermez, sadece boş görünür.-->
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+        </div>
+
+
+    </div>
+
+
+
+    <!--chartlar için-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <h4 class="text-info">Son 7 Günlük Satış Trend</h4>
+    <canvas id="satisTrendChart" width="400" height="200"></canvas>
+
+    <script>
+    var gunler = @Html.Raw(Json.Encode(ViewBag.SatisTarihleri));
+    var satislar = @Html.Raw(Json.Encode(ViewBag.SatisAdetleri));
+
+    var ctx = document.getElementById('satisTrendChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: gunler,
+            datasets: [{
+                label: 'Satış Adedi',
+                data: satislar,
+                fill: false,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    </script>
+
+
+
+
+</div>
+
+
+
+

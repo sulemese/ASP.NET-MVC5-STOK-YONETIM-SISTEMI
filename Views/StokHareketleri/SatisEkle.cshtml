@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "SatisEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@model MVCSTOK.Models.Entity.tblstokhareketleri
+
+@using (Html.BeginForm("SatisEkle", "StokHareketleri", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(x => x.MusteriId, "Müşteri Seçin:")
+        @Html.DropDownListFor(x => x.MusteriId, (IEnumerable<SelectListItem>)ViewBag.MusteriListesi, "--Müşteri Seçin--", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.MusteriId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.UrunId, "Ürün Seçin:")
+        @Html.DropDownListFor(x => x.UrunId, (IEnumerable<SelectListItem>)ViewBag.UrunListesi, "--Ürün Seçin--", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.UrunId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Miktar, "Miktar:")
+        @Html.TextBoxFor(x => x.Miktar, new { @class = "form-control", type = "number", min = "1", placeholder = "Miktar girin" })
+        @Html.ValidationMessageFor(x => x.Miktar, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.fiyat, "Satış Tutarı:")
+        @Html.TextBoxFor(x => x.fiyat, new { @class = "form-control", placeholder = "Satış tutarını girin" })
+        @Html.ValidationMessageFor(x => x.fiyat, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Aciklama, "Açıklama:")
+        @Html.TextAreaFor(x => x.Aciklama, new { @class = "form-control", rows = 3, placeholder = "Açıklama girin" })
+        @Html.ValidationMessageFor(x => x.Aciklama, "", new { @class = "text-danger" })
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+}

@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBMvcStokModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblpersonel">
+    <Key>
+      <PropertyRef Name="PersonelId" />
+    </Key>
+    <Property Name="PersonelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonelAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PersonelSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="departman" Type="Int32" />
+    <Property Name="aktiflik" Type="Boolean" DefaultValue="True" />
+    <Property Name="PersonelEmail" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PersonelTelefon" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="tblstokhareketleri" Relationship="DBMvcStokModel.FK_tblstokhareketleri_tblpersonel" FromRole="tblpersonel" ToRole="tblstokhareketleri" />
+  </EntityType>
+  <EntityContainer Name="DBMvcStokEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblpersonel" EntityType="Self.tblpersonel" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DBMvcStokModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DBMvcStokModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="sysdiagrams" EntityType="DBMvcStokModel.sysdiagrams" />
+    <EntitySet Name="tblkategori" EntityType="DBMvcStokModel.tblkategori" />
+    <EntitySet Name="tblurunler" EntityType="DBMvcStokModel.tblurunler" />
+    <AssociationSet Name="FK_tblurunler_tblkategori" Association="DBMvcStokModel.FK_tblurunler_tblkategori">
+      <End Role="tblkategori" EntitySet="tblkategori" />
+      <End Role="tblurunler" EntitySet="tblurunler" />
+    </AssociationSet>
+    <EntitySet Name="tblmusteri" EntityType="DBMvcStokModel.tblmusteri" />
+    <EntitySet Name="tblislemler" EntityType="DBMvcStokModel.tblislemler" />
+    <EntitySet Name="tblstokhareketleri" EntityType="DBMvcStokModel.tblstokhareketleri" />
+    <AssociationSet Name="FK_tblstokhareketleri_tblislemler" Association="DBMvcStokModel.FK_tblstokhareketleri_tblislemler">
+      <End Role="tblislemler" EntitySet="tblislemler" />
+      <End Role="tblstokhareketleri" EntitySet="tblstokhareketleri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblstokhareketleri_tblmusteri" Association="DBMvcStokModel.FK_tblstokhareketleri_tblmusteri">
+      <End Role="tblmusteri" EntitySet="tblmusteri" />
+      <End Role="tblstokhareketleri" EntitySet="tblstokhareketleri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblstokhareketleri_tblpersonel" Association="DBMvcStokModel.FK_tblstokhareketleri_tblpersonel">
+      <End Role="tblpersonel" EntitySet="tblpersonel" />
+      <End Role="tblstokhareketleri" EntitySet="tblstokhareketleri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblstokhareketleri_tblurunler" Association="DBMvcStokModel.FK_tblstokhareketleri_tblurunler">
+      <End Role="tblurunler" EntitySet="tblurunler" />
+      <End Role="tblstokhareketleri" EntitySet="tblstokhareketleri" />
+    </AssociationSet>
+    <EntitySet Name="tblkullanici" EntityType="DBMvcStokModel.tblkullanici" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tblkategori">
+    <Key>
+      <PropertyRef Name="KategoriId" />
+    </Key>
+    <Property Name="KategoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KategoriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="aktiflik" Type="Boolean" Nullable="false" DefaultValue="True" />
+    <Property Name="Aciklama" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblurunler" Relationship="DBMvcStokModel.FK_tblurunler_tblkategori" FromRole="tblkategori" ToRole="tblurunler" />
+  </EntityType>
+  <EntityType Name="tblurunler">
+    <Key>
+      <PropertyRef Name="UrunId" />
+    </Key>
+    <Property Name="UrunId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UrunAd" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="marka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StokAdet" Type="Int32" />
+    <Property Name="alisfiyat" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="satisfiyat" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="KategoriId" Type="Int32" />
+    <Property Name="aktiflik" Type="Boolean" DefaultValue="True" />
+    <Property Name="EklenmeTarihi" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblkategori" Relationship="DBMvcStokModel.FK_tblurunler_tblkategori" FromRole="tblurunler" ToRole="tblkategori" />
+    <NavigationProperty Name="tblstokhareketleri" Relationship="DBMvcStokModel.FK_tblstokhareketleri_tblurunler" FromRole="tblurunler" ToRole="tblstokhareketleri" />
+  </EntityType>
+  <Association Name="FK_tblurunler_tblkategori">
+    <End Type="DBMvcStokModel.tblkategori" Role="tblkategori" Multiplicity="0..1" />
+    <End Type="DBMvcStokModel.tblurunler" Role="tblurunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblkategori">
+        <PropertyRef Name="KategoriId" />
+      </Principal>
+      <Dependent Role="tblurunler">
+        <PropertyRef Name="KategoriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblmusteri">
+    <Key>
+      <PropertyRef Name="MüsteriId" />
+    </Key>
+    <Property Name="MüsteriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MusteriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MusteriSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sehir" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="bakiye" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MusteriEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MusteriTelefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="MusteriAdres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="aktiflik" Type="Boolean" DefaultValue="True" />
+    <Property Name="MusteriEklenmeTarihi" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblstokhareketleri" Relationship="DBMvcStokModel.FK_tblstokhareketleri_tblmusteri" FromRole="tblmusteri" ToRole="tblstokhareketleri" />
+  </EntityType>
+  <EntityType Name="tblislemler">
+    <Key>
+      <PropertyRef Name="İslemId" />
+    </Key>
+    <Property Name="İslemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="İslemTipi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblstokhareketleri" Relationship="DBMvcStokModel.FK_tblstokhareketleri_tblislemler" FromRole="tblislemler" ToRole="tblstokhareketleri" />
+  </EntityType>
+  <EntityType Name="tblstokhareketleri">
+    <Key>
+      <PropertyRef Name="HareketId" />
+    </Key>
+    <Property Name="HareketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MusteriId" Type="Int32" />
+    <Property Name="PersonelId" Type="Int32" />
+    <Property Name="İşlemId" Type="Int32" />
+    <Property Name="fiyat" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Tarih" Type="DateTime" Precision="3" />
+    <Property Name="Aciklama" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="UrunId" Type="Int32" />
+    <Property Name="Miktar" Type="Int32" />
+    <NavigationProperty Name="tblislemler" Relationship="DBMvcStokModel.FK_tblstokhareketleri_tblislemler" FromRole="tblstokhareketleri" ToRole="tblislemler" />
+    <NavigationProperty Name="tblmusteri" Relationship="DBMvcStokModel.FK_tblstokhareketleri_tblmusteri" FromRole="tblstokhareketleri" ToRole="tblmusteri" />
+    <NavigationProperty Name="tblpersonel" Relationship="DBMvcStokModel.FK_tblstokhareketleri_tblpersonel" FromRole="tblstokhareketleri" ToRole="tblpersonel" />
+    <NavigationProperty Name="tblurunler" Relationship="DBMvcStokModel.FK_tblstokhareketleri_tblurunler" FromRole="tblstokhareketleri" ToRole="tblurunler" />
+  </EntityType>
+  <Association Name="FK_tblstokhareketleri_tblislemler">
+    <End Type="DBMvcStokModel.tblislemler" Role="tblislemler" Multiplicity="0..1" />
+    <End Type="DBMvcStokModel.tblstokhareketleri" Role="tblstokhareketleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblislemler">
+        <PropertyRef Name="İslemId" />
+      </Principal>
+      <Dependent Role="tblstokhareketleri">
+        <PropertyRef Name="İşlemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblstokhareketleri_tblmusteri">
+    <End Type="DBMvcStokModel.tblmusteri" Role="tblmusteri" Multiplicity="0..1" />
+    <End Type="DBMvcStokModel.tblstokhareketleri" Role="tblstokhareketleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblmusteri">
+        <PropertyRef Name="MüsteriId" />
+      </Principal>
+      <Dependent Role="tblstokhareketleri">
+        <PropertyRef Name="MusteriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblstokhareketleri_tblpersonel">
+    <End Type="DBMvcStokModel.tblpersonel" Role="tblpersonel" Multiplicity="0..1" />
+    <End Type="DBMvcStokModel.tblstokhareketleri" Role="tblstokhareketleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblpersonel">
+        <PropertyRef Name="PersonelId" />
+      </Principal>
+      <Dependent Role="tblstokhareketleri">
+        <PropertyRef Name="PersonelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblstokhareketleri_tblurunler">
+    <End Type="DBMvcStokModel.tblurunler" Role="tblurunler" Multiplicity="0..1" />
+    <End Type="DBMvcStokModel.tblstokhareketleri" Role="tblstokhareketleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblurunler">
+        <PropertyRef Name="UrunId" />
+      </Principal>
+      <Dependent Role="tblstokhareketleri">
+        <PropertyRef Name="UrunId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblkullanici">
+    <Key>
+      <PropertyRef Name="KullaniciId" />
+    </Key>
+    <Property Name="KullaniciId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KullaniciAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Rol" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Aktiflik" Type="Boolean" DefaultValue="True" />
+  </EntityType>
+</Schema>

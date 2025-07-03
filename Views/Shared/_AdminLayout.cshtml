@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MVC STOK</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="@Url.Action("Index","Dashboardİstatistikler")"> <img src="~/Content/a.png" alt="Logo" height="40px" width="40px" style="margin-top:-10px" /></a>
+            </div>
+            <ul class="nav navbar-nav" >
+                <li><a href="@Url.Action("Index","StokHareketleri")"><span class="glyphicon glyphicon-usd"></span> SATIŞLAR</a></li>
+                <li><a href="@Url.Action("Index","Musteriler")"><span class="glyphicon glyphicon-user"></span> MÜŞTERİLER</a></li>
+                <li><a href="@Url.Action("Index","Kategoriler")"><span class="glyphicon glyphicon-list-alt"></span> KATEGORİLER</a></li>
+                <li><a href="@Url.Action("Index","Ürünler")"><span class="glyphicon glyphicon-barcode"></span> ÜRÜNLER</a></li>
+                <li><a href="@Url.Action("Index","Dashboardİstatistikler")"><span class="glyphicon glyphicon-stats"></span> RAPORLAMA</a></li>
+                <li><a href="@Url.Action("Index","Admin")"><span class="glyphicon glyphicon-list"></span> ADMİN İŞLEMLERİ</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> YARDIM</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> ÇIKIŞ YAP</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+    <!-- jQuery ve Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <!--<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>-->
+</body>
+</html>

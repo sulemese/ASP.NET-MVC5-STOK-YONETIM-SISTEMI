@@ -1,0 +1,66 @@
+﻿@model PagedList.IPagedList<MVCSTOK.Models.Entity.tblstokhareketleri>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using PagedList.Mvc;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Satışlar</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Satışlar</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ürün</th>
+                    <th>Müşteri</th>
+                    <th>Personel</th>
+                    <th>İşlem Türü</th>
+                    <th>Miktar</th>
+                    <th>Fiyat</th>
+                    <th>Sipariş Tarihi</th>
+                    <th>Açıklama</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var satis in Model)
+                {
+                <tr>
+                    <td>@satis.HareketId</td>
+                    <td>@satis.tblurunler.UrunAd</td>
+                    <td>@satis.tblmusteri.MusteriAd @satis.tblmusteri.MusteriSoyad</td>
+                    <td>@satis.PersonelId</td>
+                    <td>@satis.tblislemler.İslemTipi</td>
+                    <td>@satis.Miktar</td>
+                    <td>@String.Format("{0:C}", satis.fiyat)</td>
+                    <td>@string.Format("{0:dd.MM.yyyy}", satis.Tarih)</td>
+
+                    <td>@satis.Aciklama</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        <!-- Sayfalama linkleri -->
+        <div class="text-left">
+            @Html.PagedListPager(Model, sayfa => Url.Action("Index", new { sayfa }))
+        </div>
+        <a href="/StokHareketleri/SatisEkle" class="btn btn-primary">Yeni Satış</a>
+
+    </div>
+
+</body>
+</html>
+
+

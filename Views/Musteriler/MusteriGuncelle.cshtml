@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "MusteriGuncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@model MVCSTOK.Models.Entity.tblmusteri
+
+@using (Html.BeginForm("MusteriGuncelle", "Musteriler", FormMethod.Post))
+{
+    //güncellemenin yapılması için arka planda seçilen müşterinin idsi form üstünden gönderilmeli.
+    @Html.HiddenFor(x => x.MüsteriId);
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.MusteriAd, "Ad:")
+        @Html.TextBoxFor(x => x.MusteriAd, new { @class = "form-control", placeholder = " Ad girin" })
+        @Html.ValidationMessageFor(x => x.MusteriAd, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.MusteriSoyad, "Soyad:")
+        @Html.TextBoxFor(x => x.MusteriSoyad, new { @class = "form-control", placeholder = " Soyad girin" })
+        @Html.ValidationMessageFor(x => x.MusteriSoyad, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.sehir, "Şehir:")
+        @Html.TextBoxFor(x => x.sehir, new { @class = "form-control", placeholder = "Şehir girin" })
+        @Html.ValidationMessageFor(x => x.sehir, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.MusteriEmail, "E-Posta:")
+        @Html.TextBoxFor(x => x.MusteriEmail, new { @class = "form-control", placeholder = "E posta girin" })
+        @Html.ValidationMessageFor(x => x.MusteriEmail, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.MusteriTelefon, "Telefon:")
+        @Html.TextBoxFor(x => x.MusteriTelefon, new { @class = "form-control", placeholder = "Telefon girin" })
+        @Html.ValidationMessageFor(x => x.MusteriTelefon, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.MusteriAdres, "Adres:")
+        @Html.TextAreaFor(x => x.MusteriAdres, new { @class = "form-control", rows = 3, placeholder = "Adres girin" })
+        @Html.ValidationMessageFor(x => x.MusteriAdres, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.bakiye, "Bakiye:")
+        @Html.TextBoxFor(x => x.bakiye, new { @class = "form-control", placeholder = "Bakiye girin" })
+        @Html.ValidationMessageFor(x => x.bakiye, "", new { @class = "text-danger" })
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+
+}
+

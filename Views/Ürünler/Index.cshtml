@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model PagedList.IPagedList<MVCSTOK.Models.Entity.tblurunler>
+@using PagedList.Mvc;
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ürünler</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Ürünler</h2>
+
+        <!--FormMethod.Get kullanarak URL’de arama parametresi görünür olur, böylece sayfa yenilense bile arama kaybolmaz.-->
+        @using (Html.BeginForm("Index", "Ürünler", FormMethod.Get))
+        {
+            <div class="form-inline">
+                <input type="text" name="arama" class="form-control" placeholder="Ürün ara..." value="@Request.QueryString["arama"]" />
+                <button type="submit" class="btn btn-primary">Ara</button>
+            </div>
+        }
+
+
+
+
+
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Ürün ID</th>
+                    <th>Adı</th>
+                    <th>Marka</th>
+                    <th>Kategori</th>
+                    <th>Stok Sayısı</th>
+                    <th>Alış Fiyat</th>
+                    <th>Satış Fiyat</th>
+                    <th>Eklenme Tarihi</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var urun in Model)
+                {
+                <tr>
+                    <td>@urun.UrunId</td>
+                    <td>@urun.UrunAd</td>
+                    <td>@urun.marka</td>
+                    <td>@urun.tblkategori.KategoriAd</td>
+                    <td>@urun.StokAdet</td>
+                    <td>@String.Format("{0:C}", urun.alisfiyat)</td> <!--ürün fiyatını  para birimi (currency) formatında göstermek için kullanılır.-->
+                    <td>@String.Format("{0:C}", urun.satisfiyat)</td><!--ürün fiyatını  para birimi (currency) formatında göstermek için kullanılır.-->
+                    <td>@string.Format("{0:dd.MM.yyyy}", urun.EklenmeTarihi)</td>
+
+                    <td>
+                        <a href="/Ürünler/ÜrünSil/@urun.UrunId" class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+                        <a href="/Ürünler/ÜrünGüncelle/@urun.UrunId" class="btn btn-success">Güncelle</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        <!-- Sayfalama linkleri -->
+        <div class="text-left">
+            @Html.PagedListPager(Model, sayfa => Url.Action("Index", new {  arama = Request.QueryString["arama"],sayfa }))
+        </div>
+        <a href="/Ürünler/ÜrünEkle" class="btn btn-primary">Yeni Ürün</a>
+
+    </div>
+
+</body>
+</html>
+
+

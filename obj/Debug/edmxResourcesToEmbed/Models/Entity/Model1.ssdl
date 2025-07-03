@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBMvcStokModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tblislemler">
+    <Key>
+      <PropertyRef Name="İslemId" />
+    </Key>
+    <Property Name="İslemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="İslemTipi" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblkategori">
+    <Key>
+      <PropertyRef Name="KategoriId" />
+    </Key>
+    <Property Name="KategoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KategoriAd" Type="varchar" MaxLength="50" />
+    <Property Name="aktiflik" Type="bit" Nullable="false" />
+    <Property Name="Aciklama" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="tblkullanici">
+    <Key>
+      <PropertyRef Name="KullaniciId" />
+    </Key>
+    <Property Name="KullaniciId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciAd" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sifre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Rol" Type="nvarchar" MaxLength="20" />
+    <Property Name="Aktiflik" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblmusteri">
+    <Key>
+      <PropertyRef Name="MüsteriId" />
+    </Key>
+    <Property Name="MüsteriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MusteriAd" Type="varchar" MaxLength="50" />
+    <Property Name="MusteriSoyad" Type="varchar" MaxLength="50" />
+    <Property Name="sehir" Type="varchar" MaxLength="20" />
+    <Property Name="bakiye" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MusteriEmail" Type="nvarchar" MaxLength="100" />
+    <Property Name="MusteriTelefon" Type="varchar" MaxLength="20" />
+    <Property Name="MusteriAdres" Type="varchar" MaxLength="100" />
+    <Property Name="aktiflik" Type="bit" />
+    <Property Name="MusteriEklenmeTarihi" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblpersonel">
+    <Key>
+      <PropertyRef Name="PersonelId" />
+    </Key>
+    <Property Name="PersonelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonelAd" Type="varchar" MaxLength="50" />
+    <Property Name="PersonelSoyad" Type="varchar" MaxLength="50" />
+    <Property Name="departman" Type="int" />
+    <Property Name="aktiflik" Type="bit" />
+    <Property Name="PersonelEmail" Type="nchar" MaxLength="10" />
+    <Property Name="PersonelTelefon" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="tblstokhareketleri">
+    <Key>
+      <PropertyRef Name="HareketId" />
+    </Key>
+    <Property Name="HareketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MusteriId" Type="int" />
+    <Property Name="PersonelId" Type="int" />
+    <Property Name="İşlemId" Type="int" />
+    <Property Name="fiyat" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Tarih" Type="datetime" />
+    <Property Name="Aciklama" Type="varchar" MaxLength="255" />
+    <Property Name="UrunId" Type="int" />
+    <Property Name="Miktar" Type="int" />
+  </EntityType>
+  <EntityType Name="tblurunler">
+    <Key>
+      <PropertyRef Name="UrunId" />
+    </Key>
+    <Property Name="UrunId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UrunAd" Type="varchar" MaxLength="100" />
+    <Property Name="marka" Type="varchar" MaxLength="50" />
+    <Property Name="StokAdet" Type="int" />
+    <Property Name="alisfiyat" Type="money" />
+    <Property Name="satisfiyat" Type="money" />
+    <Property Name="KategoriId" Type="int" />
+    <Property Name="aktiflik" Type="bit" />
+    <Property Name="EklenmeTarihi" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_tblstokhareketleri_tblislemler">
+    <End Role="tblislemler" Type="Self.tblislemler" Multiplicity="0..1" />
+    <End Role="tblstokhareketleri" Type="Self.tblstokhareketleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblislemler">
+        <PropertyRef Name="İslemId" />
+      </Principal>
+      <Dependent Role="tblstokhareketleri">
+        <PropertyRef Name="İşlemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblstokhareketleri_tblmusteri">
+    <End Role="tblmusteri" Type="Self.tblmusteri" Multiplicity="0..1" />
+    <End Role="tblstokhareketleri" Type="Self.tblstokhareketleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblmusteri">
+        <PropertyRef Name="MüsteriId" />
+      </Principal>
+      <Dependent Role="tblstokhareketleri">
+        <PropertyRef Name="MusteriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblstokhareketleri_tblpersonel">
+    <End Role="tblpersonel" Type="Self.tblpersonel" Multiplicity="0..1" />
+    <End Role="tblstokhareketleri" Type="Self.tblstokhareketleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblpersonel">
+        <PropertyRef Name="PersonelId" />
+      </Principal>
+      <Dependent Role="tblstokhareketleri">
+        <PropertyRef Name="PersonelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblstokhareketleri_tblurunler">
+    <End Role="tblurunler" Type="Self.tblurunler" Multiplicity="0..1" />
+    <End Role="tblstokhareketleri" Type="Self.tblstokhareketleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblurunler">
+        <PropertyRef Name="UrunId" />
+      </Principal>
+      <Dependent Role="tblstokhareketleri">
+        <PropertyRef Name="UrunId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblurunler_tblkategori">
+    <End Role="tblkategori" Type="Self.tblkategori" Multiplicity="0..1" />
+    <End Role="tblurunler" Type="Self.tblurunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblkategori">
+        <PropertyRef Name="KategoriId" />
+      </Principal>
+      <Dependent Role="tblurunler">
+        <PropertyRef Name="KategoriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="DBMvcStokModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblislemler" EntityType="Self.tblislemler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblkategori" EntityType="Self.tblkategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblkullanici" EntityType="Self.tblkullanici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblmusteri" EntityType="Self.tblmusteri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblpersonel" EntityType="Self.tblpersonel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblstokhareketleri" EntityType="Self.tblstokhareketleri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblurunler" EntityType="Self.tblurunler" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblstokhareketleri_tblislemler" Association="Self.FK_tblstokhareketleri_tblislemler">
+      <End Role="tblislemler" EntitySet="tblislemler" />
+      <End Role="tblstokhareketleri" EntitySet="tblstokhareketleri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblstokhareketleri_tblmusteri" Association="Self.FK_tblstokhareketleri_tblmusteri">
+      <End Role="tblmusteri" EntitySet="tblmusteri" />
+      <End Role="tblstokhareketleri" EntitySet="tblstokhareketleri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblstokhareketleri_tblpersonel" Association="Self.FK_tblstokhareketleri_tblpersonel">
+      <End Role="tblpersonel" EntitySet="tblpersonel" />
+      <End Role="tblstokhareketleri" EntitySet="tblstokhareketleri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblstokhareketleri_tblurunler" Association="Self.FK_tblstokhareketleri_tblurunler">
+      <End Role="tblurunler" EntitySet="tblurunler" />
+      <End Role="tblstokhareketleri" EntitySet="tblstokhareketleri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblurunler_tblkategori" Association="Self.FK_tblurunler_tblkategori">
+      <End Role="tblkategori" EntitySet="tblkategori" />
+      <End Role="tblurunler" EntitySet="tblurunler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

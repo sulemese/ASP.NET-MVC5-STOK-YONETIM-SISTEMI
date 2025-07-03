@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "ÜrünEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model MVCSTOK.Models.Entity.tblurunler
+
+@using (Html.BeginForm("ÜrünEkle", "Ürünler", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(x => x.UrunAd, "Ürün Adı:")
+        @Html.TextBoxFor(x => x.UrunAd, new { @class = "form-control", placeholder = "Ürün adını girin" })
+        @Html.ValidationMessageFor(x => x.UrunAd, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.marka, "Marka Adı:")
+        @Html.TextBoxFor(x => x.marka, new { @class = "form-control", placeholder = "Ürün markasını girin" })
+        @Html.ValidationMessageFor(x => x.marka, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.StokAdet, "Stok Sayısı:")
+        @Html.TextBoxFor(x => x.StokAdet, new { @class = "form-control", placeholder = "Ürün stok sayısını girin", type = "number", min = "0" })
+        @Html.ValidationMessageFor(x => x.StokAdet, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.alisfiyat, "Alış Fiyatı:")
+        @Html.TextBoxFor(x => x.alisfiyat, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.alisfiyat, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.satisfiyat, "Satış Fiyatı:")
+        @Html.TextBoxFor(x => x.satisfiyat, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.satisfiyat, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.KategoriId, "Ürün Kategorisi:")
+        @Html.DropDownListFor(x => x.KategoriId, (IEnumerable<SelectListItem>)ViewBag.KategoriListesi, "--Kategori Seçin--", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.KategoriId, "", new { @class = "text-danger" })
+    </div>     
+<button type = "submit" class="btn btn-primary">Kaydet</button>
+
+
+}
