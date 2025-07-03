@@ -40,7 +40,7 @@ Aşağıdaki tablolar kullanılmıştır:
 
 ## 📸 Ekran Görüntüleri
 
-![](./project images/1.png)
+![a](./project images/1.png)
 
 
 ## ⚙️ Kurulum Adımları
