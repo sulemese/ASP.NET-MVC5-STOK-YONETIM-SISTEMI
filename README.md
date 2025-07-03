@@ -40,22 +40,22 @@ Aşağıdaki tablolar kullanılmıştır:
 
 ## 📸 Ekran Görüntüleri
 
-# Veritabanı
+### Veritabanı
 ![1](./project-images/1.png)
 
-# Giriş Paneli
+### Giriş Paneli
 ![1](./project-images/7.png)
 
-# Dashboard İstatistikler Paneli
+### Dashboard İstatistikler Paneli
 ![1](./project-images/6.png)
 
-# Ürünler
+### Ürünler
 ![1](./project-images/5.png)
 
-# Müşteri Ekleme Ekranı 
+### Müşteri Ekleme Ekranı 
 ![1](./project-images/2.png)
 
-# Ürün Kategorileri
+### Ürün Kategorileri
 ![1](./project-images/3.png)
 
 
