@@ -40,7 +40,7 @@ Aşağıdaki tablolar kullanılmıştır:
 
 ## 📸 Ekran Görüntüleri
 
-![Öğrenci Listesi](./Images/ogrenci-listesi.png)
+![](./project images/1.png)
 
 
 ## ⚙️ Kurulum Adımları
