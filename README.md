@@ -4,7 +4,7 @@ Bu proje, **ASP.NET MVC 5** konusunda pratik yapmak amacıyla geliştirilmiş bi
 
 ## 🚀 Temel Özellikler
 
-✅ Kategori, ürün, müşteri ve personel yönetimi  
+✅ Authentication , Authorization ile doğrulama
 ✅ SQL Server üzerinde **Entity Framework (Database-First)** yaklaşımı  
 ✅ Bootstrap ile responsive ve kullanıcı dostu arayüz  
 ✅ Form doğrulama (validation) ile güvenli veri girişi  
@@ -31,12 +31,16 @@ Bu proje, **ASP.NET MVC 5** konusunda pratik yapmak amacıyla geliştirilmiş bi
 ## 🗃️ Veritabanı Tasarımı
 
 Aşağıdaki tablolar kullanılmıştır:
+| Tablo | Açıklama |
+|-------|----------|
+| **tblkategori** | KategoriId, KategoriAdi, Aciklama |
+| **tblurun** | UrunId, UrunAdi, KategoriId, StokAdet, BirimFiyat, Barkod, EklenmeTarihi |
+| **tblmusteri** | MusteriId, Ad, Soyad, Email, Telefon, Adres |
+| **tblpersonel** | PersonelId, Ad, Soyad, Email, Telefon, Pozisyon, AktifMi |
+| **tblstokhareket** | HareketId, UrunId, Miktar, Tarih, PersonelId, Aciklama, HareketTipi |
+| **tblkullanici** | KullaniciId, KullaniciAd, Sifre, Rol |
 
-- **Kategoriler:** KategoriId, KategoriAdi, Aciklama
-- **Ürünler:** UrunId, UrunAdi, KategoriId, StokAdet, BirimFiyat, Barkod, EklenmeTarihi
-- **Müşteriler:** MusteriId, Ad, Soyad, Email, Telefon, Adres
-- **Personeller:** PersonelId, Ad, Soyad, Email, Telefon, Pozisyon, AktifMi
-- **StokHareketleri:** HareketId, UrunId, Miktar, Tarih, PersonelId, Aciklama, HareketTipi
+---
 
 ## 📸 Ekran Görüntüleri
 
