@@ -40,15 +40,28 @@ Aşağıdaki tablolar kullanılmıştır:
 
 ## 📸 Ekran Görüntüleri
 
+# Veritabanı
 ![1](./project-images/1.png)
-![1](./project-images/2.png)
-![1](./project-images/3.png)
-![1](./project-images/4.png)
-![1](./project-images/5.png)
-![1](./project-images/6.png)
+
+# Giriş Paneli
 ![1](./project-images/7.png)
-![1](./project-images/8.png)
-![1](./project-images/9.png)
+
+# Dashboard İstatistikler Paneli
+![1](./project-images/6.png)
+
+# Ürünler
+![1](./project-images/5.png)
+
+# Müşteri Ekleme Ekranı 
+![1](./project-images/2.png)
+
+# Ürün Kategorileri
+![1](./project-images/3.png)
+
+
+
+
+
 
 
 ## ⚙️ Kurulum Adımları
