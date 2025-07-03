@@ -41,6 +41,14 @@ Aşağıdaki tablolar kullanılmıştır:
 ## 📸 Ekran Görüntüleri
 
 ![1](./project-images/1.png)
+![1](./project-images/2.png)
+![1](./project-images/3.png)
+![1](./project-images/4.png)
+![1](./project-images/5.png)
+![1](./project-images/6.png)
+![1](./project-images/7.png)
+![1](./project-images/8.png)
+![1](./project-images/9.png)
 
 
 ## ⚙️ Kurulum Adımları
